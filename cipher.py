@@ -168,32 +168,32 @@ def decrypt(ciphertext, password):
                 direction_down = True
                 current_rail = 1
 
-# List of empty strings for each rail to hold the characters
-rails = [""] * num_rails
+    # List of empty strings for each rail to hold the characters
+    rails = [""] * num_rails
 
-# Count how many characters belong to each rail using the pattern
-rail_lengths = [pattern.count(r) for r in range(num_rails)]
+    # Count how many characters belong to each rail using the pattern
+    rail_lengths = [pattern.count(r) for r in range(num_rails)]
 
-# Fill each rail with the appropriate number of characters from the ciphertext
-# creates placholders for each rail, counts how many character should go in each rail, slices the ciphertext into segments that match length
-index = 0
-for rail_num in range(num_rails):
-    length = rail_lengths[rail_num]
-    rails[rail_num] = ciphertext[index:index + length]
-    index += length
+    # Fill each rail with the appropriate number of characters from the ciphertext
+    # creates placholders for each rail, counts how many character should go in each rail, slices the ciphertext into segments that match length
+    index = 0
+    for rail_num in range(num_rails):
+        length = rail_lengths[rail_num]
+        rails[rail_num] = ciphertext[index:index + length]
+        index += length
     
     
-# Reconstruct the original plaintext by reading from the rails in zigzag order
-rail_pointers = [0] * num_rails # Track how many characters we've used from each rail
-plaintext = "" # Final output
+    # Reconstruct the original plaintext by reading from the rails in zigzag order
+    rail_pointers = [0] * num_rails # Track how many characters we've used from each rail
+    plaintext = "" # Final output
     
-# Follow the same zigzag pattern to pull characters from each rail
-for rail_index in pattern:
+    # Follow the same zigzag pattern to pull characters from each rail
+    for rail_index in pattern:
     # append the next charcter from the correct rail
-    plaintext += rails[rail_index][rail_pointers[rail_index]]
-    rail_pointers[rail_index] += 1
+        plaintext += rails[rail_index][rail_pointers[rail_index]]
+        rail_pointers[rail_index] += 1
         
-return plaintext
+    return plaintext
     
 
     
